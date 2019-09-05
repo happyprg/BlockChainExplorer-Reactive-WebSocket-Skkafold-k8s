@@ -1,0 +1,14 @@
+apiVersion: v1
+items:
+  - apiVersion: v1
+    data:
+      SPRING_PROFILES_ACTIVE: dev
+    kind: ConfigMap
+    metadata:
+      creationTimestamp: null
+      name: spring-boot-dev
+      selfLink: /api/v1/namespaces/default/configmaps/spring-boot-dev
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

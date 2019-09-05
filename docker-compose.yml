@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  blockchain_monitor:
+    build: "api/"
+    image: "hongsgo/blockchain-monitor:latest"
+    ports:
+      - "8080:8080"
+    container_name: "blockchain_monitor"
+    command: --spring.profiles.active=alpha
+#    --spring.cloud.config.fail-fast=true --spring.cloud.config.retry.max-interval=5 --spring.cloud.config.retry.max-attempts=10000

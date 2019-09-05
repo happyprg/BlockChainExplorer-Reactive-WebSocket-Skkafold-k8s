@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockchain-monitor-dev
+  labels:
+    app: blockchain-monitor-dev
+spec:
+  ports:
+    - port: 8080
+      nodePort: 32764
+  type: NodePort
+  selector:
+    app: blockchain-monitor-dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockchain-monitor-dev
+  labels:
+    app: blockchain-monitor-dev
+spec:
+  selector:
+    matchLabels:
+      app: blockchain-monitor-dev
+  template:
+    metadata:
+      labels:
+        app: blockchain-monitor-dev
+    spec:
+      containers:
+        - name: blockchain-monitor-dev
+          image: hongsgo/blockchain-monitor
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/check
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          envFrom:
+            - configMapRef:
+                name: spring-boot-dev

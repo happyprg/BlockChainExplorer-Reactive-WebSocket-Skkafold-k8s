@@ -1,0 +1,55 @@
+# --------------------------------------------------------------------------------------------------------------
+# app configurations
+# --------------------------------------------------------------------------------------------------------------
+app: blockchain-monitor
+project: api
+phase: ${spring.profiles.active}
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      poll-interval: 2
+      quiet-period: 1
+  mustache:
+    cache: false
+  profiles:
+    active: local
+  output:
+    ansi:
+      enabled: always
+  task:
+    scheduling:
+      pool:
+        size: 5
+      thread-name-prefix: scheduler-chain-data-fetch
+scheduler:
+  fixed-rate: 1000
+  initialDelay: 1000
+logging:
+  file:
+    max-history: 10
+monitor:
+  static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
+  on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
+  showing-event-cnt: 3
+  showing-block-cnt: 15
+  showing-tx-cnt: 15
+---
+spring:
+  profiles: local
+monitor:
+  static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
+  on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
+chain:
+  snodeHost: https://wallet.icon.foundation
+  cnodeHost: https://wallet.icon.foundation
+---
+spring:
+  profiles: alpha
+monitor:
+  static-websocket-host: happyprg.com/block-explorer:80/ws/block/monitoring
+  on-demand-websocket-host: happyprg.com/block-explorer:80/ws/block/onDemandMonitoring
+chain:
+  snodeHost: https://wallet.icon.foundation
+  cnodeHost: https://wallet.icon.foundation

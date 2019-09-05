@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src=" https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <style>
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+
+        .dataTables_filter {
+            float: left !important;
+        }
+
+        /*html {*/
+        /*    font-size: 10px;*/
+        /*}*/
+
+        /*.table {*/
+        /*    font-size: 10px;*/
+        /*}*/
+
+        /*.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {*/
+        /*  padding: 0;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="form-group">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href=".">{{activeProfiles}}</a>
+            BlockChain Monitor
+        </div>
+    </nav>
+</div>
+<div class="table-responsive text-nowrap">
+    <table id="tableInfo"
+           class="table-sm table-hover table-dark display compact table table-striped table-bordered"
+           style="width:100%">
+        <thead>
+        <tr>
+            <th colspan="9" class="bg">ChainInfo</th>
+        </tr>
+        <tr>
+            <th class="th-sm" data-field="clientId">ClientId</th>
+            <th class="th-sm" title="It can be CNode or Exchange-GW endpoint, the SNode subscribe to this endpoint"
+                data-field="cNodeHost">
+                CNodeHost Host
+            </th>
+            <th class="th-sm" title="Target SNode's endpoint monitored by Monitoring Server"
+                data-field="sNodeHost">SNodeHost
+            </th>
+            <th class="th-sm" title="Displays the monitoring start time." data-sortable="true">
+                Init Time
+            </th>
+            <th class="th-sm"
+                title="Displays the number of times LastBlockHeight has been updated on the Monitoring Page."
+                data-sortable="true" data-field="updateCnt">
+                Update Cnt
+            </th>
+            <th class="th-sm" title="LastBlockHeight of the SNode monitored by the Monitoring Server."
+                data-sortable="true" data-field="lastBlockTime">LastBlockTime
+            </th>
+            <th class="th-sm">C/S-Node</th>
+            <th class="th-sm" title="CNodeLastBlockHeight-SNodeLastBlockHeight" data-sortable="true"
+                data-field="gap">Gap C-S
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="td_clientId">loading..</td>
+            <td id="td_cNodeHost">loading..</td>
+            <td id="td_sNodeHost">loading</td>
+            <td id="td_pageOpenDateTime">loading..</td>
+            <td id="td_dataUpdateCnt">loading..</td>
+            <td id="td_lastBlockTime">loading..</td>
+            <td id="td_sNodeLastBlockHeight">loading..</td>
+            <td id="td_gapBlockHeight">loading..</td>
+        </tr>
+        </tbody>
+    </table>
+    <table id="tableLastBlock"
+           class="table-sm table-hover table-dark table-striped display compact table table-striped table-bordered"
+           style="width:100%">
+        <thead>
+        <tr>
+            <th colspan="7" class="bg-primary">List of Block</th>
+        </tr>
+        <tr>
+            <th class="th-sm" data-field="timestamp">timestamp</th>
+            <th class="th-sm" data-field="blockHeight">blockHeight</th>
+            <th class="th-sm" data-field="blockHash">blockHash</th>
+            <th class="th-sm" data-field="localDateTime">localDateTime</th>
+            <th class="th-sm" data-field="prev_block_hash">prev_block_hash</th>
+        </tr>
+        </thead>
+    </table>
+    <table id="tableTx"
+           class="table-sm table-hover table-dark table-striped table-dark table-striped display compact table table-striped table-bordered"
+           style="width:100%">
+        <thead>
+        <tr>
+            <th colspan="10" class="bg-success">List of Transaction</th>
+        </tr>
+        <tr>
+            <th class="th-sm" data-field="timestamp">timestamp</th>
+            <th class="th-sm" data-field="blockHeight">blockHeight</th>
+            <th class="th-sm" data-field="txIndex">txIndex</th>
+            <th class="th-sm" data-field="txHash">txHash</th>
+            <th class="th-sm" data-field="from">from</th>
+            <th class="th-sm" data-field="to">to</th>
+            <th class="th-sm" data-field="value">value</th>
+            <th class="th-sm" data-field="localDateTime">localDateTime</th>
+            <th class="th-sm" data-field="message">message</th>
+        </tr>
+        </thead>
+    </table>
+    <table id="tableErrorInfo"
+           class="table-sm table-hover table-dark table-striped display compact table table-striped table-bordered"
+           style="width:100%">
+        <thead>
+        <tr>
+            <th colspan="7" class="bg-danger">ErrorInfo</th>
+        </tr>
+        <tr>
+            <th class="th-sm" data-field="eventDateTime">eventDateTime</th>
+            <th class="th-sm" data-field="errorCode">errorCode</th>
+            <th class="th-sm" data-field="msg">msg</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    let tableInfo;
+    let tableLastBlock;
+    let tableTx;
+    let tableErrorInfo;
+    $("#td_pageOpenDateTime").text(`${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`);
+    $("#td_clientId").text(Number(Math.random() * 100000).toFixed(0));
+
+    $(document).ready(function () {
+        tableErrorInfo = $('#tableErrorInfo').DataTable({
+            paging: false,
+            ordering: true,
+            info: false,
+            searching: false,
+            order: [[0, "desc"]],
+            responsive: true,
+        });
+        tableLastBlock = $('#tableLastBlock').DataTable({
+            paging: false,
+            ordering: true,
+            info: false,
+            searching: true,
+            order: [[1, "desc"]],
+            responsive: true,
+            search: "_INPUT_",
+            language: {
+                searchPlaceholder: "Search Blocks"
+            }
+        });
+        tableTx = $('#tableTx').DataTable({
+            paging: false,
+            ordering: true,
+            info: false,
+            searching: true,
+            order: [[1, "desc"]],
+            responsive: true,
+            language: {
+                searchPlaceholder: "Search Transactions"
+            }
+        });
+
+        $('.dataTables_filter input[type="search"]').css({
+            'width': '450px',
+            'display': 'inline-block'
+        });
+    });
+
+    const getUrlParameter = function getUrlParameter(sParam) {
+        let sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    let sNodeHost = "{{sNodeHost}}";
+    if (!!getUrlParameter("sNodeHost")) {
+        sNodeHost = getUrlParameter("sNodeHost");
+    }
+    let cNodeHost = "{{cNodeHost}}";
+    if (!!getUrlParameter("cNodeHost")) {
+        cNodeHost = getUrlParameter("cNodeHost");
+    }
+    $("#td_sNodeHost").text(sNodeHost);
+    $("#td_cNodeHost").text(cNodeHost);
+
+    const showingEventCnt = "{{showingEventCnt}}";
+    const showingBlockCnt = "{{showingBlockCnt}}";
+    const showingTxCnt = "{{showingTxCnt}}";
+
+    const ErrorCode = {
+        SERVER_IS_WARMING_UP: 1,
+        BLOCK_SYNC_DELAYED: 2,
+        SERVER_CONNECTION_ERROR: 3,
+        SERVER_CONNECTION_CLOSE: 4,
+    };
+
+    let dataUpdateCnt = 0;
+    let sNodeLastBlockHeight = "loading..";
+
+    function fillColorByBlockHeight(object) {
+        object.css('color', dataUpdateCnt % 2 === 1 ? "DeepPink" : "DeepSkyBlue");
+        return object;
+    }
+
+    function addEventMsg(errCode, msg) {
+        $(tableErrorInfo.row.add([
+            new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+            errCode || '',
+            msg
+        ]).draw(false).node()).hide().fadeIn();
+        if (tableErrorInfo.data().length > showingEventCnt - 1) {
+            tableErrorInfo.row(':last').remove();
+        }
+    }
+
+    function addLastBlock(lastblock) {
+        let height = lastblock.result.height;
+        let localDateTime = `${new Date(lastblock.result.time_stamp / 1000).toLocaleTimeString()} ${new Date(
+                lastblock.result.time_stamp / 1000).toLocaleDateString()}`;
+        let block_hash = lastblock.result.block_hash;
+        let prev_block_hash = lastblock.result.prev_block_hash;
+        let prev_block_confirm = lastblock.result.prev_block_confirm;
+        $(tableLastBlock.row.add([
+            lastblock.result.time_stamp || '',
+            height,
+            block_hash || '',
+            localDateTime || '',
+            prev_block_hash
+        ]).draw(false).node()).hide().fadeIn();
+
+        let txIndex = 0;
+        lastblock.result.confirmed_transaction_list.forEach(function (item) {
+            let txTimeStampLocalDateTime = `${new Date(item.timestamp / 1000).toLocaleTimeString()} ${new Date(
+                    item.timestamp / 1000).toLocaleDateString()}`;
+            $(tableTx.row.add([
+                item.timestamp || '',
+                height,
+                txIndex++,
+                item.txHash || '',
+                item.from || '',
+                item.to || '',
+                item.value || '',
+                txTimeStampLocalDateTime || '',
+                item.msessage || ''
+            ]).draw(false).node()).hide().fadeIn();
+        });
+        if (tableLastBlock.data().length > showingBlockCnt - 1) {
+            tableLastBlock.row(':last').remove();
+        }
+        if (tableTx.data().length > showingTxCnt - 1) {
+            tableTx.row(':last').remove();
+        }
+    }
+
+    function handle(message) {
+        let serverMsg = JSON.parse(message.data);
+        if (jQuery.isEmptyObject(serverMsg) || JSON.stringify(serverMsg.blockResultMap) == "{}"
+                || JSON.stringify(serverMsg.blockResultMap.sNode) == "{}"
+                || !serverMsg.blockResultMap.sNode.startsWith("{\"jsonrpc\": \"2.0\"")) {
+            addEventMsg(ErrorCode.SERVER_IS_WARMING_UP,
+                    `There is no available server. or you entered wrong [S]Node Host - ${sNodeHost}, serverMsg - ${JSON.stringify(serverMsg)}`);
+            return;
+        }
+        let sNodeAndCNodeLastBlockInfo = serverMsg.blockResultMap;
+        let sNodeLastBlockInfo = JSON.parse(sNodeAndCNodeLastBlockInfo.sNode);
+        let cNodeLastBlockInfo;
+        if (!sNodeAndCNodeLastBlockInfo.cNode.startsWith("Connection refused")) {
+            cNodeLastBlockInfo = JSON.parse(sNodeAndCNodeLastBlockInfo.cNode);
+        } else {
+            addEventMsg(ErrorCode.SERVER_IS_WARMING_UP,
+                    `There is no available server. or you entered wrong [C]Node Host - ${cNodeHost}`);
+        }
+        if (sNodeLastBlockHeight !== sNodeLastBlockInfo.result.height) {
+            sNodeLastBlockHeight = sNodeLastBlockInfo.result.height;
+            addLastBlock(sNodeLastBlockInfo);
+            let timeStampOfBlock = new Date(sNodeLastBlockInfo.result.time_stamp / 1000);
+            let lastBlockTime = timeStampOfBlock.toLocaleDateString() + " " + timeStampOfBlock.toLocaleTimeString();
+            fillColorByBlockHeight($("#td_lastBlockTime")).text(lastBlockTime);
+            let cNodeBlockHeight = 0;
+            if (cNodeLastBlockInfo && cNodeLastBlockInfo.result) {
+                cNodeBlockHeight = cNodeLastBlockInfo.result.height;
+            }
+            fillColorByBlockHeight($("#td_sNodeLastBlockHeight")).text(
+                    `${cNodeBlockHeight} /${sNodeLastBlockHeight}`);
+            let gapBlockHeight = (Number(cNodeBlockHeight) - Number(sNodeLastBlockHeight));
+            fillColorByBlockHeight($("#td_gapBlockHeight")).text(gapBlockHeight.toString());
+            if (gapBlockHeight > 0) {
+                addEventMsg(ErrorCode.BLOCK_SYNC_DELAYED,
+                        `lastBlockTime: ${lastBlockTime},sNodeLastBlockHeight: ${sNodeLastBlockHeight},gapBlockHeight: ${gapBlockHeight}`);
+            }
+        }
+        fillColorByBlockHeight($("#td_dataUpdateCnt")).text(`${dataUpdateCnt++}`.toString());
+    }
+
+    let mySocket;
+    const socketMessageListener = (event) => {
+        handle(event);
+    };
+
+    // Open
+    const socketOpenListener = (event) => {
+        console.log(`connection established`);
+        mySocket.send(
+                `{ "comment": "Hey Server, It's me! clientId - ${$("#td_clientId").text()}",
+                 "sNodeHost" : "${sNodeHost}","cNodeHost" : "${cNodeHost}" }`
+        );
+    };
+
+    const socketCloseListener = (event) => {
+        if (mySocket) {
+            console.error(`Disconnected.`);
+            addEventMsg(ErrorCode.SERVER_CONNECTION_CLOSE,
+                    `Connection occurred error - ${new Date().toLocaleString()}, but try to reconnect a few sec later`);
+        }
+        mySocket = new WebSocket('ws://{{monitorHost}}');
+        mySocket.addEventListener('open', socketOpenListener);
+        mySocket.addEventListener('message', socketMessageListener);
+        mySocket.addEventListener('close', socketCloseListener);
+    };
+    socketCloseListener();
+</script>
+</body>
+</html>

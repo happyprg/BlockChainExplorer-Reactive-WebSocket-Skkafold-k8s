@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: alpha
+---
+spring:
+  profiles: alpha
