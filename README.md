@@ -50,3 +50,7 @@ tableTx  --> t=10
 * https://github.com/json-path/JsonPath
 * https://github.com/kittinunf/fuel/blob/master/fuel/README.md
 * Mustache
+
+# Etc
+* nginx-ingress-ws
+https://github.com/nginxinc/kubernetes-ingress/tree/master/examples/websocket
