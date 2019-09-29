@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  SPRING_PROFILES_ACTIVE: k8s
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: java-opt-k8s
+  selfLink: /api/v1/namespaces/default/configmaps/java-opt-k8s
