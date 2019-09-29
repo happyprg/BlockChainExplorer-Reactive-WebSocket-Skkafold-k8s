@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.util
+package com.happyprg.blockchain.explorer.util
 
 import com.github.kittinunf.fuel.core.FuelError
 import org.springframework.http.MediaType.APPLICATION_JSON_UTF8

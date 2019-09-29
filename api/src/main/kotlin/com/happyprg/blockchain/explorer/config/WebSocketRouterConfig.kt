@@ -6,10 +6,10 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.config
+package com.happyprg.blockchain.explorer.config
 
-import com.happyprg.blockchain.monitor.router.websocket.BlockMonitoringRouter
-import com.happyprg.blockchain.monitor.router.websocket.OnDemandBlockMonitoringRouter
+import com.happyprg.blockchain.explorer.router.websocket.BlockMonitoringRouter
+import com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.HandlerMapping
@@ -18,8 +18,8 @@ import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAd
 
 @Configuration
 class WebSocketRouterConfig(
-    val blockMonitoringRouter: BlockMonitoringRouter,
-    val onDemandBlockMonitoringRouter: OnDemandBlockMonitoringRouter
+    val blockMonitoringRouter: com.happyprg.blockchain.explorer.router.websocket.BlockMonitoringRouter,
+    val onDemandBlockMonitoringRouter: com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 ) {
     @Bean
     fun websocketHandlerAdapter() = WebSocketHandlerAdapter()

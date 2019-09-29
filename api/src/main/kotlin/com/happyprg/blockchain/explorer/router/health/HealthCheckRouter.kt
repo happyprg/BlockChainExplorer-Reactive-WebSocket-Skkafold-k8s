@@ -6,14 +6,21 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.config
+package com.happyprg.blockchain.explorer.router.health
 
-import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.web.reactive.function.BodyInserters.fromObject
+import org.springframework.web.reactive.function.server.router
 
 @Configuration
-@ConfigurationProperties(prefix = "chain")
-data class ChainConfig(
-    var sNodeHost: String? = null,
-    var cNodeHost: String? = null
-)
+class HealthCheckRouter {
+
+    @Bean
+    fun healthRoute() = router {
+        (accept(APPLICATION_JSON) and "/health").nest {
+            GET("/check") { ok().body(fromObject("ok")) }
+        }
+    }
+}

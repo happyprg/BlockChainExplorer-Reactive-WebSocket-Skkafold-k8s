@@ -6,11 +6,11 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.html
+package com.happyprg.blockchain.explorer.html
 
-import com.happyprg.blockchain.monitor.config.ChainConfig
-import com.happyprg.blockchain.monitor.config.MonitoringConfig
-import com.happyprg.blockchain.monitor.router.websocket.OnDemandBlockMonitoringRouter
+import com.happyprg.blockchain.explorer.config.ChainConfig
+import com.happyprg.blockchain.explorer.config.MonitoringConfig
+import com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 import org.apache.commons.lang3.StringUtils.isNotBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
@@ -22,8 +22,8 @@ import java.util.Arrays.toString
 
 @Controller
 class HtmlController(
-    val chainConfig: ChainConfig, val monitoringConfig: MonitoringConfig,
-    val onDemandBlockMonitoringRouter: OnDemandBlockMonitoringRouter
+    val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig, val monitoringConfig: com.happyprg.blockchain.explorer.config.MonitoringConfig,
+    val onDemandBlockMonitoringRouter: com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 ) {
 
     @Autowired

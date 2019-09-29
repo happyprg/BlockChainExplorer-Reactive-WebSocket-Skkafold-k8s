@@ -6,9 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.router
+package com.happyprg.blockchain.explorer.router
 
-import com.happyprg.blockchain.monitor.MainApplicationTests
+import com.happyprg.blockchain.explorer.MainApplicationTests
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

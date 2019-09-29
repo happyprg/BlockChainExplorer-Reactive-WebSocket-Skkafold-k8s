@@ -6,8 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.router.health
+package com.happyprg.blockchain.explorer.router.config
 
+import com.happyprg.blockchain.explorer.config.ChainConfig
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -15,12 +16,14 @@ import org.springframework.web.reactive.function.BodyInserters.fromObject
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
-class HealthCheckRouter {
+class ConfigRouter(val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig) {
 
     @Bean
-    fun healthRoute() = router {
-        (accept(APPLICATION_JSON) and "/health").nest {
-            GET("/check") { ok().body(fromObject("ok")) }
+    fun configurationRoute() = router {
+        (accept(APPLICATION_JSON) and "/configuration").nest {
+            GET("/all") {
+                ok().body(fromObject("""chainConfig - $chainConfig"""))
+            }
         }
     }
 }

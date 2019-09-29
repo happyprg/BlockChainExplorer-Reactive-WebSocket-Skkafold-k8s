@@ -14,8 +14,8 @@ plugins {
     application
 }
 application {
-    mainClassName = "com.happyprg.blockchain.monitor.MainApplicationKt"
-    group = "com.happyprg.blockchain.monitor"
+    mainClassName = "com.happyprg.blockchain.explorer.MainApplicationKt"
+    group = "com.happyprg.blockchain.explorer"
     version = "0.0.1-SNAPSHOT"
 
     applicationDefaultJvmArgs = listOf(

@@ -6,20 +6,20 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.block
+package com.happyprg.blockchain.explorer.block
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.result.Result
-import com.happyprg.blockchain.monitor.config.ChainConfig
+import com.happyprg.blockchain.explorer.config.ChainConfig
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils.replace
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
 @Service
-class BlockService(val chainConfig: ChainConfig) {
+class BlockService(val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig) {
 
     fun getBlockByHash(blockHash: String): Mono<Result<String, FuelError>> =
         Fuel.post("${chainConfig.sNodeHost}/api/v3")

@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor
+package com.happyprg.blockchain.explorer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -22,5 +22,5 @@ import org.springframework.scheduling.annotation.EnableScheduling
 class MainApplication
 
 fun main(args: Array<String>) {
-    runApplication<MainApplication>(*args)
+    runApplication<com.happyprg.blockchain.explorer.MainApplication>(*args)
 }

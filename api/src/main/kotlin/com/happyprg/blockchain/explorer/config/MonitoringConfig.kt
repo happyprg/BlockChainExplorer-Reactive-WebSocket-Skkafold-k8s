@@ -6,13 +6,13 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.config
+package com.happyprg.blockchain.explorer.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConfigurationProperties(prefix = "monitor")
+@ConfigurationProperties(prefix = "explorer")
 data class MonitoringConfig(
     var staticWebSocketHost: String? = null,
     var onDemandWebSocketHost: String? = null,

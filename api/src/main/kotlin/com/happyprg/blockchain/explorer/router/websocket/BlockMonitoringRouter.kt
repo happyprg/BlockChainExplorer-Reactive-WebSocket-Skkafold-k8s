@@ -6,12 +6,12 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.router.websocket
+package com.happyprg.blockchain.explorer.router.websocket
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.happyprg.blockchain.monitor.block.BlockHandler
-import com.happyprg.blockchain.monitor.config.ChainConfig
-import com.happyprg.blockchain.monitor.util.toResult
+import com.happyprg.blockchain.explorer.block.BlockHandler
+import com.happyprg.blockchain.explorer.config.ChainConfig
+import com.happyprg.blockchain.explorer.util.toResult
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.socket.WebSocketHandler
@@ -23,7 +23,7 @@ import java.time.Duration.ofMillis
 import java.util.stream.Stream
 
 @Component
-class BlockMonitoringRouter(val chainConfig: ChainConfig, val blockHandler: BlockHandler) : WebSocketHandler {
+class BlockMonitoringRouter(val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig, val blockHandler: com.happyprg.blockchain.explorer.block.BlockHandler) : WebSocketHandler {
 
     lateinit var blockResultMap: Map<String, String>
     val intervalFlux: Flux<Tuple2<Long, Map<String, String>>>

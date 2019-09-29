@@ -39,7 +39,7 @@ plugins {
 
 
 allprojects {
-    group = "com.happyprg.blockchain.monitor"
+    group = "com.happyprg.blockchain.explorer"
     version = "0.0.1-SNAPSHOT"
 
     repositories {

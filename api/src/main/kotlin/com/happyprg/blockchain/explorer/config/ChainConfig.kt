@@ -6,15 +6,14 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.happyprg.blockchain.monitor.block
+package com.happyprg.blockchain.explorer.config
 
-import com.github.kittinunf.fuel.core.FuelError
-import com.github.kittinunf.result.Result
-import org.springframework.stereotype.Component
-import reactor.core.publisher.Mono
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.context.annotation.Configuration
 
-@Component
-class BlockHandler(val blockService: BlockService) {
-    fun getLastBlock(nodeHost: String): Mono<Result<String, FuelError>> = blockService.getLastBlock(nodeHost)
-//        .log("called LastBlock")
-}
+@Configuration
+@ConfigurationProperties(prefix = "chain")
+data class ChainConfig(
+    var sNodeHost: String? = null,
+    var cNodeHost: String? = null
+)
