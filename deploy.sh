@@ -2,7 +2,7 @@
 set -x
 gradle clean
 gradle assemble
-docker rmi -f hongsgo/blockchain-monitor:latest
-docker build -t hongsgo/blockchain-monitor:latest api/
-docker push hongsgo/blockchain-monitor:latest
+docker rmi -f hongsgo/blockexplorer:latest
+docker build -t hongsgo/blockexplorer:latest api/
+docker push hongsgo/blockexplorer:latest
 skaffold run
