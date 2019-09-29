@@ -53,3 +53,12 @@ monitor:
 chain:
   snodeHost: https://wallet.icon.foundation
   cnodeHost: https://wallet.icon.foundation
+---
+spring:
+  profiles: k8s
+monitor:
+  static-websocket-host: happyprg.com/blockexplorer:80/ws/block/monitoring
+  on-demand-websocket-host: happyprg.com/blockexplorer:80/ws/block/onDemandMonitoring
+chain:
+  snodeHost: https://wallet.icon.foundation
+  cnodeHost: https://wallet.icon.foundation
