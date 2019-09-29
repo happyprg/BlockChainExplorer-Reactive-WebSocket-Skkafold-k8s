@@ -9,8 +9,6 @@
 package com.happyprg.blockchain.explorer.router.websocket
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.happyprg.blockchain.explorer.block.BlockHandler
-import com.happyprg.blockchain.explorer.config.ChainConfig
 import com.happyprg.blockchain.explorer.util.toResult
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
