@@ -57,8 +57,8 @@ chain:
 spring:
   profiles: k8s
 explorer:
-  static-websocket-host: happyprg.com/blockexplorer/ws/block/explorer
-  on-demand-websocket-host: happyprg.com/blockexplorer/ws/block/onDemandMonitoring
+  static-websocket-host: 45.32.31.18:31000/blockexplorer/ws/block/explorer
+  on-demand-websocket-host: 45.32.31.183:31000/blockexplorer/ws/block/onDemandMonitoring
 chain:
   snodeHost: https://wallet.icon.foundation
   cnodeHost: https://wallet.icon.foundation
