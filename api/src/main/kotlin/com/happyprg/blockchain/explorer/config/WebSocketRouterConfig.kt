@@ -8,8 +8,6 @@
 
 package com.happyprg.blockchain.explorer.config
 
-import com.happyprg.blockchain.explorer.router.websocket.BlockMonitoringRouter
-import com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.HandlerMapping
@@ -28,7 +26,7 @@ class WebSocketRouterConfig(
     fun handlerMapping(): HandlerMapping {
         val handlerMapping = SimpleUrlHandlerMapping()
         handlerMapping.urlMap = mapOf(
-            "/ws/block/monitoring" to blockMonitoringRouter,
+            "/ws/block/explorer" to blockMonitoringRouter,
             "/ws/block/onDemandMonitoring" to onDemandBlockMonitoringRouter
         )
         handlerMapping.order = 1

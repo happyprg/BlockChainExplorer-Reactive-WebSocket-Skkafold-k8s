@@ -30,7 +30,7 @@ logging:
   file:
     max-history: 10
 explorer:
-  static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
+  static-websocket-host: 127.0.0.1:8080/ws/block/explorer
   on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
   showing-event-cnt: 3
   showing-block-cnt: 15
@@ -39,7 +39,7 @@ explorer:
 spring:
   profiles: local
 explorer:
-  static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
+  static-websocket-host: 127.0.0.1:8080/ws/block/explorer
   on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
 chain:
   snodeHost: https://wallet.icon.foundation
@@ -48,7 +48,7 @@ chain:
 spring:
   profiles: alpha
 explorer:
-  static-websocket-host: happyprg.com/block-explorer:80/ws/block/monitoring
+  static-websocket-host: happyprg.com/block-explorer:80/ws/block/explorer
   on-demand-websocket-host: happyprg.com/block-explorer:80/ws/block/onDemandMonitoring
 chain:
   snodeHost: https://wallet.icon.foundation
@@ -57,7 +57,7 @@ chain:
 spring:
   profiles: k8s
 explorer:
-  static-websocket-host: happyprg.com/blockexplorer:80/ws/block/monitoring
+  static-websocket-host: happyprg.com/blockexplorer:80/ws/block/explorer
   on-demand-websocket-host: happyprg.com/blockexplorer:80/ws/block/onDemandMonitoring
 chain:
   snodeHost: https://wallet.icon.foundation
