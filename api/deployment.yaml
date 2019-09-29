@@ -1,35 +1,35 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blockchain-monitor-dev
+  name: blockexplorer-dev
   labels:
-    app: blockchain-monitor-dev
+    app: blockexplorer-dev
 spec:
   ports:
     - port: 8080
       nodePort: 32764
   type: NodePort
   selector:
-    app: blockchain-monitor-dev
+    app: blockexplorer-dev
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blockchain-monitor-dev
+  name: blockexplorer-dev
   labels:
-    app: blockchain-monitor-dev
+    app: blockexplorer-dev
 spec:
   selector:
     matchLabels:
-      app: blockchain-monitor-dev
+      app: blockexplorer-dev
   template:
     metadata:
       labels:
-        app: blockchain-monitor-dev
+        app: blockexplorer-dev
     spec:
       containers:
-        - name: blockchain-monitor-dev
-          image: hongsgo/blockchain-monitor
+        - name: blockexplorer-dev
+          image: hongsgo/blockexplorer
           ports:
             - containerPort: 3000
           readinessProbe:

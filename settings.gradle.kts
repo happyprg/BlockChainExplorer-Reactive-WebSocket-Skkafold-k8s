@@ -1,4 +1,4 @@
-rootProject.name = "blockchain-monitor"
+rootProject.name = "blockexplorer"
 include(":api")
 
 project(":api").name = "api"

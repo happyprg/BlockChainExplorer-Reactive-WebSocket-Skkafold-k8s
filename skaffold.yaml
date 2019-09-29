@@ -2,7 +2,7 @@ apiVersion: skaffold/v1beta12
 kind: Config
 build:
   artifacts:
-    - image: hongsgo/blockchain-monitor
+    - image: hongsgo/blockexplorer
       context: .
       jibGradle:
         project: api
