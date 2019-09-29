@@ -8,9 +8,6 @@
 
 package com.happyprg.blockchain.explorer.html
 
-import com.happyprg.blockchain.explorer.config.ChainConfig
-import com.happyprg.blockchain.explorer.config.MonitoringConfig
-import com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 import org.apache.commons.lang3.StringUtils.isNotBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
@@ -22,7 +19,8 @@ import java.util.Arrays.toString
 
 @Controller
 class HtmlController(
-    val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig, val monitoringConfig: com.happyprg.blockchain.explorer.config.MonitoringConfig,
+    val chainConfig: com.happyprg.blockchain.explorer.config.ChainConfig,
+    val explorerConfig: com.happyprg.blockchain.explorer.config.ExplorerConfig,
     val onDemandBlockMonitoringRouter: com.happyprg.blockchain.explorer.router.websocket.OnDemandBlockMonitoringRouter
 ) {
 
@@ -44,10 +42,10 @@ class HtmlController(
                 isNotBlank(s) && s!!.startsWith("http") -> {
                     onDemandBlockMonitoringRouter.sNodeHost = s
                     addAttribute("sNodeHost", onDemandBlockMonitoringRouter.sNodeHost)
-                    addAttribute("monitorHost", monitoringConfig.onDemandWebSocketHost)
+                    addAttribute("monitorHost", explorerConfig.onDemandWebSocketHost)
                 }
                 else -> {
-                    addAttribute("monitorHost", monitoringConfig.staticWebSocketHost)
+                    addAttribute("monitorHost", explorerConfig.staticWebSocketHost)
                     addAttribute("sNodeHost", chainConfig.sNodeHost)
                 }
             }
@@ -60,9 +58,9 @@ class HtmlController(
                 else -> addAttribute("cNodeHost", chainConfig.cNodeHost)
             }
 
-            addAttribute("showingEventCnt", e ?: monitoringConfig.showingEventCnt)
-            addAttribute("showingBlockCnt", b ?: monitoringConfig.showingBlockCnt)
-            addAttribute("showingTxCnt", t ?: monitoringConfig.showingTxCnt)
+            addAttribute("showingEventCnt", e ?: explorerConfig.showingEventCnt)
+            addAttribute("showingBlockCnt", b ?: explorerConfig.showingBlockCnt)
+            addAttribute("showingTxCnt", t ?: explorerConfig.showingTxCnt)
 
             addAttribute("activeProfiles", toString(environment.activeProfiles))
         }

@@ -29,7 +29,7 @@ scheduler:
 logging:
   file:
     max-history: 10
-monitor:
+explorer:
   static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
   on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
   showing-event-cnt: 3
@@ -38,7 +38,7 @@ monitor:
 ---
 spring:
   profiles: local
-monitor:
+explorer:
   static-websocket-host: 127.0.0.1:8080/ws/block/monitoring
   on-demand-websocket-host: 127.0.0.1:8080/ws/block/onDemandMonitoring
 chain:
@@ -47,7 +47,7 @@ chain:
 ---
 spring:
   profiles: alpha
-monitor:
+explorer:
   static-websocket-host: happyprg.com/block-explorer:80/ws/block/monitoring
   on-demand-websocket-host: happyprg.com/block-explorer:80/ws/block/onDemandMonitoring
 chain:
@@ -56,7 +56,7 @@ chain:
 ---
 spring:
   profiles: k8s
-monitor:
+explorer:
   static-websocket-host: happyprg.com/blockexplorer:80/ws/block/monitoring
   on-demand-websocket-host: happyprg.com/blockexplorer:80/ws/block/onDemandMonitoring
 chain:

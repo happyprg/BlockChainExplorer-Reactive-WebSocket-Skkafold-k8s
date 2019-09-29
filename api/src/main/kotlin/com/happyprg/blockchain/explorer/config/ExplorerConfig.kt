@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @ConfigurationProperties(prefix = "explorer")
-data class MonitoringConfig(
+data class ExplorerConfig(
     var staticWebSocketHost: String? = null,
     var onDemandWebSocketHost: String? = null,
     var showingEventCnt: String? = null,
